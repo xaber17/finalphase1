@@ -1,0 +1,35 @@
+<%- include('partials/header')%>
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container-fluid p-5">
+        <h1 class="text-center "><%= `${data.name}` %></h1> <!-- judul -->
+
+        <div class="container-fluid mb-4">
+            <h3>This menu ordered by</h3>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < data.Customers.length; i++){ %>
+                    <tr>
+                        <td><%= `${data.Customers[i].firstname} ${data.Customers[i].lastname}` %></td>
+                        <td><%= data.Customers[i].phone%></td>
+                        <!-- <td><%= data.Customers[i].Order.notes %></td> -->
+                        <td><%= data.Customers[i].Order.caps() %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

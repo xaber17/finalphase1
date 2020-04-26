@@ -1,0 +1,41 @@
+<%- include('partials/header')%>
+
+<body>
+  <div id="customers">
+    <table id="tab_customers" class="table table-striped">
+      <colgroup>
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
+      </colgroup>
+      <thead>
+        <tr class='warning'>
+          <th>Customer ID</th>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0; i < object.Menus.length; i++){ %>
+        <tr>
+          <td><%= `#${object.id}` %></td>
+          <td><%= object.Menus[i].name %></td>
+          <td><%= object.Menus[i].price %></td>
+        </tr>
+        <% } %>
+        <% let total = 0 %>
+        <% for(let i = 0; i < object.Menus.length; i++){ %>
+        <% total += Number(object.Menus[i].price) %>
+        <% } %>
+        <tr>
+          <td>Total</td>
+          <td> </td>
+          <td><%= total %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button onclick="demoFromHTML();">PDF</button>
+</body>
+
+</html>

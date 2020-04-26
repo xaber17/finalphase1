@@ -1,0 +1,43 @@
+<%- include('partials/header')%>
+
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center">Customer</h1>
+        
+        <div class="container-fluid text-right">
+            <a href="/customers/add"><button type="button" class="btn btn-success">Add customers</button></a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">phone</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(list => { %>
+                    <tr>
+                        <td><%= `${list.firstname} ${list.lastname}` %></td>
+                        <td><%= list.phone %></td>
+                        <td>
+                            <a href="/customers/delete/<%=list.id%>"onclick="return confirm('Are you sure?')">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                            <a href="/customers/addchoose/<%=list.id%>"><button type="button" class="btn btn-success">Pick up Menu</button>
+                            </a>
+                            <a href="/customers/confirm/<%= list.id %>"><button type="button" class="btn-success">Check Invoice</button>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

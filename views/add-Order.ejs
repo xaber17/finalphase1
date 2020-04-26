@@ -1,0 +1,65 @@
+<%- include('partials/header')%>
+<body>
+
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container-fluid p-5">
+        <h1><%= `${data.firstname} ${data.lastname}` %></h1>
+        <% if(alert.msg){ %>
+            <div class="alert alert-<%= alert.type %>" role="alert">
+                <%= alert.msg %>
+            </div>
+        <% } %>
+    
+        <form action="/customers/addchoose/<%= data.id %>" method="POST">
+            <h4>Choose Your Menu!</h4>
+            <input name="CustomerId" value="<%= data.id %>" hidden>
+            <div class="form-group">
+                <label>Food Name</label>
+                <select name="MenuId" class="form-control" required>
+                    <option value="">Select Menu</option>
+                    <% for(let i = 0; i < dataMenu.length; i++){ %>
+                        <option value="<%= dataMenu[i].id %>">
+                            <%= `${dataMenu[i].name} only ${formatUang(Number(dataMenu[i].price))}` %>
+                        </option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Notes:</label>
+                <input name="notes" type="text" class="form-control" placeholder="e.g: Tambah nasi sebangkok">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/customers"><button type="button" class="btn btn-danger">Cancel</button></a>
+        </form> <br>
+
+        <h3>Your Order lists</h3>
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name of Menu</th>
+                    <th scope="col">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < dataOrder.length; i++){ %>
+                <tr>
+                    <td>
+                    <% for(let j = 0; j < dataMenu.length; j++){ %>
+                        <% if(dataMenu[j].id == dataOrder[i].MenuId){ %>
+                            <%= `${dataMenu[j].name}` %>
+                            <% break %>
+                        <% } %>
+                    <% } %>
+                    </td>
+                    <!-- <td><%= dataOrder[i].notes %></td> -->
+                    <td><%= dataOrder[i].caps() %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
